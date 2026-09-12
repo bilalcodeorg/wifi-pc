@@ -10,7 +10,7 @@ if (POLICY CMP0141)
 endif()
 
 project (WifiPc)
-project (WifiPcUsage)
+project (Test)
 
 # Add library
 add_library(
@@ -19,7 +19,7 @@ add_library(
 	src/scan.cpp
 	src/throw_err.cpp
 )
-target_include_directories(WifiPC
+target_include_directories(WifiPc
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
@@ -27,13 +27,13 @@ target_include_directories(WifiPC
 
 # Add source to this project's executable.
 add_executable (
-	WifiPcUsage
+	Test
 	test/usage.cpp
 )
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET WifiPc PROPERTY CXX_STANDARD 20)
-  set_property(TARGET WifiPcUsage PROPERTY CXX_STANDARD 20)
+  set_property(TARGET Test PROPERTY CXX_STANDARD 20)
 endif()
 
 # TODO: Add tests and install targets if needed.
