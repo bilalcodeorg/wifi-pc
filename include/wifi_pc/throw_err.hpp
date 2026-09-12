@@ -2,9 +2,13 @@
 
 #include <string>
 
-class ThrowError {
-private:
-public:
-	static void WifiAdapterNotFound();
-	static void WifiAdapterNotFound(std::string& msg);
+namespace wifi_pc {
+
+	class ThrowError {
+	private:
+	public:
+		static void WifiAdapterNotFound();
+		static void WifiAdapterNotFound(const std::string& msg);
+	};
+
 };

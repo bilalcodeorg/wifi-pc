@@ -2,13 +2,13 @@
 #include <stdexcept>
 #include <string>
 
-void ThrowError::WifiAdapterNotFound()
+void wifi_pc::ThrowError::WifiAdapterNotFound()
 {
 	std::string msg = "failed to initialize Wi-Fi adapter";
 	ThrowError::WifiAdapterNotFound(msg);
 }
 
-void ThrowError::WifiAdapterNotFound(std::string& msg)
+void wifi_pc::ThrowError::WifiAdapterNotFound(std::string& msg)
 {
-	throw std::runtime_error("WifiAdapterNotFound: " + current_msg);
+	throw std::runtime_error("WifiAdapterNotFound: " + msg);
 }
