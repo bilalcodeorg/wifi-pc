@@ -1,0 +1,14 @@
+# Visual Studio
+.vs/
+
+# Build output
+build/
+out/
+Debug/
+Release/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
