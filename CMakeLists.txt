@@ -44,8 +44,6 @@ target_include_directories(Test
 )
 target_link_libraries(Test PRIVATE WifiPc)
 
-
-
 # Cmake version
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET WifiPc PROPERTY CXX_STANDARD 20)

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <memory>
 #include <wifi_pc.hpp>
 
 int main() {
