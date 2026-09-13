@@ -10,30 +10,44 @@ if (POLICY CMP0141)
 endif()
 
 project (WifiPc)
-project (Test)
 
 # Add library
 add_library(
 	WifiPc
-	src/wifi_pc.cpp
 	src/scan.cpp
 	src/throw_err.cpp
+	src/wifi_network.cpp
+	platform/windows/src/windows_wifi_scan.cpp
 )
 target_include_directories(WifiPc
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+	PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/platform/windows/include
 )
 
+# TODO: Add tests and install targets if needed.
 
-# Add source to this project's executable.
+if(WIN32)
+    target_link_libraries(WifiPc PRIVATE wlanapi)
+endif()
+
+# Test project
+project (Test)
 add_executable (
 	Test
 	test/usage.cpp
 )
+target_include_directories(Test
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+target_link_libraries(Test PRIVATE WifiPc)
 
+
+
+# Cmake version
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET WifiPc PROPERTY CXX_STANDARD 20)
   set_property(TARGET Test PROPERTY CXX_STANDARD 20)
 endif()
-
-# TODO: Add tests and install targets if needed.
