@@ -17,13 +17,13 @@ add_library(
 	src/scan.cpp
 	src/throw_err.cpp
 	src/wifi_network.cpp
-	platform/windows/src/windows_wifi_scan.cpp
+	platform/src/windows/wifi_scan.cpp
 )
 target_include_directories(WifiPc
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 	PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/platform/windows/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/platform/include
 )
 
 # TODO: Add tests and install targets if needed.

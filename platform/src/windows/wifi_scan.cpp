@@ -1,4 +1,4 @@
-#include <windows_wifi_scan.hpp>
+#include <windows/wifi_scan.hpp>
 
 #ifdef _WIN32
 

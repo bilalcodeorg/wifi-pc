@@ -2,7 +2,7 @@
 #include <wifi_pc/types.hpp>
 #include <wifi_pc/wifi_network.hpp>
 #include <wifi_pc/throw_err.hpp>
-#include <windows_wifi_scan.hpp>
+#include <windows/wifi_scan.hpp>
 
 wifi_pc::Scan::Scan()
 {
