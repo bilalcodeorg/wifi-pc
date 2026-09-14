@@ -16,7 +16,7 @@ namespace windows{
 	private:
 		static std::string WideToStr(const WCHAR* wide);
 	public:
-		static std::unique_ptr<wifi_pc::type::WifiNetList> ScanNetworks();
+		static void ScanNetworks(wifi_pc::type::WifiNetList& networks);
 	};
 }
 

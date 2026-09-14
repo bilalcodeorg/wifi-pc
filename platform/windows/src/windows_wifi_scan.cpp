@@ -19,7 +19,9 @@ std::string windows::Wifi::WideToStr(const WCHAR* wide) {
     return str;
 }
 
-std::unique_ptr<wifi_pc::type::WifiNetList> windows::Wifi::ScanNetworks()
+// Scanned wifi networks will be stored in networks paramter
+// of function
+void windows::Wifi::ScanNetworks(wifi_pc::type::WifiNetList& networks)
 {
 
     HANDLE hClient = nullptr;
@@ -30,8 +32,6 @@ std::unique_ptr<wifi_pc::type::WifiNetList> windows::Wifi::ScanNetworks()
 
     // Target (interface) adapter index
     const int target_interface_index = 0;
-    // Scanned wifi networks will be stored here
-    auto networks = std::make_unique<wifi_pc::type::WifiNetList>();
 
     if (dwResult != ERROR_SUCCESS) {
         //std::cerr << "WlanOpenHandle failed: " << dwResult << "\n";
@@ -85,7 +85,7 @@ std::unique_ptr<wifi_pc::type::WifiNetList> windows::Wifi::ScanNetworks()
                     net.bSecurityEnabled ? true : false
                 );
 
-                networks->push_back(std::move(network));
+                networks.push_back(std::move(network));
             }
         }
         WlanFreeMemory(pNetList);
@@ -100,8 +100,6 @@ std::unique_ptr<wifi_pc::type::WifiNetList> windows::Wifi::ScanNetworks()
 
     WlanFreeMemory(pIfList);
     WlanCloseHandle(hClient, nullptr);
-
-    return networks;
 }
 
 #endif // _WIN32
