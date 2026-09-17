@@ -6,8 +6,6 @@
 
 
 namespace wifi_pc::type {
-
-    typedef std::unique_ptr<std::vector<std::string>> StringList;
-
-	typedef std::vector<std::unique_ptr<wifi_pc::WifiNetwork>> WifiNetList;
+	typedef std::vector<std::string> WifiNames;
+	typedef std::vector<wifi_pc::WifiNetwork> WifiNetworks;
 }

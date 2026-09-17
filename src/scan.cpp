@@ -12,20 +12,18 @@ wifi_pc::Scan::Scan()
 	wifi_pc::ThrowError::UnsupportedPlatform();
 #endif
 
-}
-
-const wifi_pc::type::StringList wifi_pc::Scan::network_names() const
-{
-	auto network_names = std::make_unique<std::vector<std::string>>();
-
+	// Updating wifi name list
 	for (const auto& network : this->networks()) {
-		network_names->push_back(network->name());
+		this->network_names_.push_back(network.name());
 	}
-
-	return network_names;
 }
 
-const wifi_pc::type::WifiNetList& wifi_pc::Scan::networks() const
+const wifi_pc::type::WifiNames& wifi_pc::Scan::network_names() const
+{
+	return this->network_names_;
+}
+
+const wifi_pc::type::WifiNetworks& wifi_pc::Scan::networks() const
 {
 	return this->networks_;
 }

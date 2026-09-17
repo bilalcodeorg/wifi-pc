@@ -9,10 +9,11 @@
 namespace wifi_pc {
 	class Scan {
 	private:
-		wifi_pc::type::WifiNetList networks_;
+		type::WifiNetworks networks_;
+		type::WifiNames network_names_;
 	public:
 		Scan();
-		const wifi_pc::type::StringList network_names() const;
-		const wifi_pc::type::WifiNetList& networks() const;
+		const type::WifiNames& network_names() const;
+		const type::WifiNetworks& networks() const;
 	};
 };

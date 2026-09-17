@@ -1,8 +1,10 @@
 #include <wifi_pc/wifi_network.hpp>
 #include <string>
+#include <iostream>
 
 wifi_pc::WifiNetwork::WifiNetwork(std::string ssid, int signal_quality, bool is_secured)
-	: ssid_(ssid), signal_quality_(signal_quality), is_secured_(is_secured) { }
+	: ssid_{ ssid }, signal_quality_{ signal_quality }, is_secured_{ is_secured } {
+}
 
 const bool& wifi_pc::WifiNetwork::IsSecured() const
 {

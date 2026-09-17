@@ -21,7 +21,7 @@ std::string windows::Wifi::WideToStr(const WCHAR* wide) {
 
 // Scanned wifi networks will be stored in networks paramter
 // of function
-void windows::Wifi::ScanNetworks(wifi_pc::type::WifiNetList& networks)
+void windows::Wifi::ScanNetworks(wifi_pc::type::WifiNetworks& networks)
 {
 
     HANDLE hClient = nullptr;
@@ -80,7 +80,7 @@ void windows::Wifi::ScanNetworks(wifi_pc::type::WifiNetList& networks)
             );
 
             {
-                auto network = std::make_unique<wifi_pc::WifiNetwork>(
+                wifi_pc::WifiNetwork network(
                     ssid, net.wlanSignalQuality,
                     net.bSecurityEnabled ? true : false
                 );
