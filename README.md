@@ -29,17 +29,19 @@ Here's a basic example showing how to scan for nearby networks and print their n
 
 int main() {
 
-	// Scanning all nearby wifi networks
+	// Scannning all nearby wifi networks
 	wifi_pc::Scan scan_result;
-
+	
 	// Obtaining scanned network name list
-	auto network_names = scan_result.network_names();
+	wifi_pc::type::WifiNames network_names = scan_result.network_names();
 
 	// Printing names of scanned wifi
-	for (int i = 0; i < network_names->size(); i++) {
+	for (int i = 0; i < network_names.size(); i++) {
 
-		std::cout << network_names->at(i) << std::endl;
+		std::cout << network_names[i] << std::endl;
 	}
+
+	return 0;
 }
 ```
 
