@@ -5,7 +5,10 @@
 #include <vector>
 
 
-namespace wifi_pc::type {
-	typedef std::vector<std::string> WifiNames;
-	typedef std::vector<wifi_pc::WifiNetwork> WifiNetworks;
-}
+namespace wifi_pc {
+	namespace type {
+
+		typedef std::vector<std::string> WifiNames;
+		typedef std::vector<wifi_pc::WifiNetwork> WifiNetworks;
+	};
+};

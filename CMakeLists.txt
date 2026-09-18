@@ -13,7 +13,7 @@ project (WifiPc)
 
 # Add library
 add_library(
-	WifiPc
+	WifiPc STATIC
 	src/scan.cpp
 	src/throw_err.cpp
 	src/wifi_network.cpp
@@ -32,6 +32,22 @@ if(WIN32)
     target_link_libraries(WifiPc PRIVATE wlanapi)
 endif()
 
+# Standard shared library
+project (WifiPcShared)
+add_library (
+	WifiPcShared SHARED
+    c_api/src/list.cpp
+	c_api/src/scan.cpp
+	c_api/src/wifi_network.cpp
+)
+add_library(WifiPc::Shared ALIAS WifiPcShared)
+target_include_directories(WifiPcShared
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/c_api/include
+)
+target_link_libraries(WifiPcShared PRIVATE WifiPc)
+target_compile_definitions(WifiPcShared PRIVATE WIFI_PC_COMPILING)
+
 # Test project
 project (Test)
 add_executable (
@@ -43,6 +59,18 @@ target_include_directories(Test
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 target_link_libraries(Test PRIVATE WifiPc)
+
+# Test shared lib
+project (TestSharedLib)
+add_executable (
+	TestSharedLib
+	test/shared_lib_consume.cpp
+)
+target_include_directories(TestSharedLib
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+target_link_libraries(TestSharedLib PRIVATE WifiPc::Shared)
 
 # Cmake version
 if (CMAKE_VERSION VERSION_GREATER 3.12)

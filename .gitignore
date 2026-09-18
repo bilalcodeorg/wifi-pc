@@ -1,6 +1,7 @@
 # Visual Studio
 .vs/
 .vscode/
+cpp.hint
 
 # Build output
 build/
