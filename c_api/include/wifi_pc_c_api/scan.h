@@ -8,14 +8,10 @@
 extern "C" {
 #endif // __cplusplus
 
-WPC_API typedef struct WpcScan WpcScan;
+typedef struct WpcScan WpcScan;
 WPC_API WpcScan* wpc_scan_new();
-WPC_API const WpcWifiNames* wpc_scan_network_names(
-    const WpcScan* context
-);
-WPC_API const WpcWifiNetworks* wpc_scan_networks(
-    const WpcScan* context
-);
+WPC_API const WpcWifiNameList* wpc_scan_network_names(const WpcScan* context);
+WPC_API const WpcWifiNetworkList* wpc_scan_networks(const WpcScan* context);
 WPC_API void wpc_scan_destroy(WpcScan* context);
 
 #ifdef __cplusplus

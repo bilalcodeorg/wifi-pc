@@ -8,14 +8,14 @@ WpcScan* wpc_scan_new() {
     return (WpcScan*) scan;
 }
 
-const WpcWifiNames* wpc_scan_network_names(const WpcScan* context) {
+const WpcWifiNameList* wpc_scan_network_names(const WpcScan* context) {
     auto scan = (wpc::Scan*) context;
-    return (WpcWifiNames*) &scan->network_names();
+    return (WpcWifiNameList*) &scan->network_names();
 }
 
-const WpcWifiNetworks* wpc_scan_networks(const WpcScan* context) {
+const WpcWifiNetworkList* wpc_scan_networks(const WpcScan* context) {
     auto scan = (wpc::Scan*) context;
-    return (WpcWifiNetworks*) &scan->networks();
+    return (WpcWifiNetworkList*) &scan->networks();
 }
 
 void wpc_scan_destroy(WpcScan* context) {

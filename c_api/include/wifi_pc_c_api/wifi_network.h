@@ -8,16 +8,9 @@ extern "C" {
 #endif // __cplusplus
 
 typedef struct WpcWifiNetwork WpcWifiNetwork;
-
-WPC_API uint8_t wpc_wifi_network_is_secured(
-    const WpcWifiNetwork* context
-);
-WPC_API const char* wpc_wifi_network_name(
-    const WpcWifiNetwork* context
-);
-WPC_API int wpc_wifi_network_signal_quality(
-    const WpcWifiNetwork* context
-);
+WPC_API uint8_t wpc_wifi_network_is_secured(const WpcWifiNetwork* context);
+WPC_API const char* wpc_wifi_network_name(const WpcWifiNetwork* context);
+WPC_API uint8_t wpc_wifi_network_signal_quality(const WpcWifiNetwork* context);
 
 #ifdef __cplusplus
 }

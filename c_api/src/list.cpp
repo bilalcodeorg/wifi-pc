@@ -1,25 +1,28 @@
 #include <wifi_pc_c_api/list.h>
 #include <wifi_pc/types.hpp>
+#include <stdint.h>
 
-const char* wpc_wifi_names_at(const WpcWifiNames* context, int index) {
+const char* wpc_wifi_name_list_at(
+    const WpcWifiNameList* context, uint64_t index
+) {
     auto names = (wpc::type::WifiNames*) context;
     return (*names)[index].data();
 }
 
-int wpc_wifi_names_size(const WpcWifiNames* context) {
-    auto names = (wpc::type::WifiNames*) context;
-    return names->size();
-}
-
-const WpcWifiNetwork* wpc_wifi_networks_at(
-    const WpcWifiNetworks* context, int index
+const WpcWifiNetwork* wpc_wifi_network_list_at(
+const WpcWifiNetworkList* context, uint64_t index
 ) {
     auto names = (wpc::type::WifiNetworks*) context;
 
     return (WpcWifiNetwork*) &(*names)[index];
 }
 
-int wpc_wifi_networks_size(const WpcWifiNetworks* context) {
+uint64_t wpc_wifi_name_list_size(const WpcWifiNameList* context) {
+    auto names = (wpc::type::WifiNames*) context;
+    return (uint64_t) names->size();
+}
+
+uint64_t wpc_wifi_network_list_size(const WpcWifiNetworkList* context) {
     auto names = (wpc::type::WifiNetworks*) context;
-    return names->size();
+    return (uint64_t) names->size();
 }

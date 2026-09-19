@@ -2,22 +2,24 @@
 
 #include <wifi_pc_c_api/export.h>
 #include <wifi_pc_c_api/wifi_network.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus
 
-WPC_API typedef struct WpcWifiNames WpcWifiNames;
-WPC_API const char* wpc_wifi_names_at(
-    const WpcWifiNames* context, int index
-);
-WPC_API int wpc_wifi_names_size(const WpcWifiNames* context);
+typedef struct WpcWifiNameList WpcWifiNameList;
+typedef struct WpcWifiNetworkList WpcWifiNetworkList;
 
-WPC_API typedef struct WpcWifiNetworks WpcWifiNetworks;
-WPC_API const WpcWifiNetwork* wpc_wifi_networks_at(
-    const WpcWifiNetworks* context, int index
+WPC_API const char* wpc_wifi_name_list_at(
+    const WpcWifiNameList* context, uint64_t index
 );
-WPC_API int wpc_wifi_networks_size(const WpcWifiNetworks* context);
+WPC_API const WpcWifiNetwork* wpc_wifi_network_list_at(
+    const WpcWifiNetworkList* context, uint64_t index
+);
+
+WPC_API uint64_t wpc_wifi_name_list_size(const WpcWifiNameList* context);
+WPC_API uint64_t wpc_wifi_network_list_size(const WpcWifiNetworkList* context);
 
 #ifdef __cplusplus
 }
