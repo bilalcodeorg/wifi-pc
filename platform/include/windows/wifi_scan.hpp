@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef WIFI_PC_WINDOWS_WIFI_SCAN_H
-#define WIFI_PC_WINDOWS_WIFI_SCAN_H
+#ifndef WPC_WINDOWS_WIFI_SCAN_H
+#define WPC_WINDOWS_WIFI_SCAN_H
 #ifdef _WIN32
 
 #include <windows.h>
@@ -21,4 +21,4 @@ namespace windows{
 }
 
 #endif // _WIN32
-#endif // !WIFI_PC_WINDOWS_WIFI_SCAN_H
+#endif // !WPC_WINDOWS_WIFI_SCAN_H

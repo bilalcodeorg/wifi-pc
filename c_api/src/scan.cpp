@@ -3,22 +3,22 @@
 
 extern "C" {
 
-WifiPcScan* wifi_pc_scan_new() {
+WpcScan* wpc_scan_new() {
     auto scan = new wpc::Scan();
-    return (WifiPcScan*) scan;
+    return (WpcScan*) scan;
 }
 
-const WifiPcWifiNames* wifi_pc_scan_network_names(const WifiPcScan* context) {
+const WpcWifiNames* wpc_scan_network_names(const WpcScan* context) {
     auto scan = (wpc::Scan*) context;
-    return (WifiPcWifiNames*) &scan->network_names();
+    return (WpcWifiNames*) &scan->network_names();
 }
 
-const WifiPcWifiNetworks* wifi_pc_scan_networks(const WifiPcScan* context) {
+const WpcWifiNetworks* wpc_scan_networks(const WpcScan* context) {
     auto scan = (wpc::Scan*) context;
-    return (WifiPcWifiNetworks*) &scan->networks();
+    return (WpcWifiNetworks*) &scan->networks();
 }
 
-void wifi_pc_scan_destroy(WifiPcScan* context) {
+void wpc_scan_destroy(WpcScan* context) {
     auto scan = (wpc::Scan*)context;
     delete scan;
 }

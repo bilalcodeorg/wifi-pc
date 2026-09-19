@@ -8,15 +8,15 @@
 extern "C" {
 #endif // __cplusplus
 
-WIFI_PC_API typedef struct WifiPcScan WifiPcScan;
-WIFI_PC_API WifiPcScan* wifi_pc_scan_new();
-WIFI_PC_API const WifiPcWifiNames* wifi_pc_scan_network_names(
-    const WifiPcScan* context
+WPC_API typedef struct WpcScan WpcScan;
+WPC_API WpcScan* wpc_scan_new();
+WPC_API const WpcWifiNames* wpc_scan_network_names(
+    const WpcScan* context
 );
-WIFI_PC_API const WifiPcWifiNetworks* wifi_pc_scan_networks(
-    const WifiPcScan* context
+WPC_API const WpcWifiNetworks* wpc_scan_networks(
+    const WpcScan* context
 );
-WIFI_PC_API void wifi_pc_scan_destroy(WifiPcScan* context);
+WPC_API void wpc_scan_destroy(WpcScan* context);
 
 #ifdef __cplusplus
 }

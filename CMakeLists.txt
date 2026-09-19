@@ -46,7 +46,7 @@ target_include_directories(WifiPcShared
         ${CMAKE_CURRENT_SOURCE_DIR}/c_api/include
 )
 target_link_libraries(WifiPcShared PRIVATE WifiPc)
-target_compile_definitions(WifiPcShared PRIVATE WIFI_PC_COMPILING)
+target_compile_definitions(WifiPcShared PRIVATE WPC_COMPILING)
 
 # Test project
 project (Test)

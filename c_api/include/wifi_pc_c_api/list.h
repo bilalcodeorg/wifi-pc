@@ -7,17 +7,17 @@
 extern "C" {
 #endif // __cplusplus
 
-WIFI_PC_API typedef struct WifiPcWifiNames WifiPcWifiNames;
-WIFI_PC_API const char* wifi_pc_wifi_names_at(
-    const WifiPcWifiNames* context, int index
+WPC_API typedef struct WpcWifiNames WpcWifiNames;
+WPC_API const char* wpc_wifi_names_at(
+    const WpcWifiNames* context, int index
 );
-WIFI_PC_API int wifi_pc_wifi_names_size(const WifiPcWifiNames* context);
+WPC_API int wpc_wifi_names_size(const WpcWifiNames* context);
 
-WIFI_PC_API typedef struct WifiPcWifiNetworks WifiPcWifiNetworks;
-WIFI_PC_API const WifiPcWifiNetwork* wifi_pc_wifi_networks_at(
-    const WifiPcWifiNetworks* context, int index
+WPC_API typedef struct WpcWifiNetworks WpcWifiNetworks;
+WPC_API const WpcWifiNetwork* wpc_wifi_networks_at(
+    const WpcWifiNetworks* context, int index
 );
-WIFI_PC_API int wifi_pc_wifi_networks_size(const WifiPcWifiNetworks* context);
+WPC_API int wpc_wifi_networks_size(const WpcWifiNetworks* context);
 
 #ifdef __cplusplus
 }
