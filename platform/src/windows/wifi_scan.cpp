@@ -21,7 +21,7 @@ std::string windows::Wifi::WideToStr(const WCHAR* wide) {
 
 // Scanned wifi networks will be stored in networks paramter
 // of function
-void windows::Wifi::ScanNetworks(wifi_pc::type::WifiNetworks& networks)
+void windows::Wifi::ScanNetworks(wpc::type::WifiNetworks& networks)
 {
 
     HANDLE hClient = nullptr;
@@ -35,7 +35,7 @@ void windows::Wifi::ScanNetworks(wifi_pc::type::WifiNetworks& networks)
 
     if (dwResult != ERROR_SUCCESS) {
         //std::cerr << "WlanOpenHandle failed: " << dwResult << "\n";
-        wifi_pc::ThrowError::General(
+        wpc::ThrowError::General(
             "windows: WlanOpenHandle failed: " + dwResult
         );
         //return 1;
@@ -46,14 +46,14 @@ void windows::Wifi::ScanNetworks(wifi_pc::type::WifiNetworks& networks)
     if (dwResult != ERROR_SUCCESS) {
         //std::cerr << "WlanEnumInterfaces failed: " << dwResult << "\n";
         WlanCloseHandle(hClient, nullptr);
-        wifi_pc::ThrowError::General(
+        wpc::ThrowError::General(
             "windows: WlanEnumInterfaces failed: " + dwResult
         );
         //return 1;
     }
 
     if (!pIfList->dwNumberOfItems) {
-        wifi_pc::ThrowError::WifiAdapterNotFound("no adapter found");
+        wpc::ThrowError::WifiAdapterNotFound("no adapter found");
     }
 
     WLAN_INTERFACE_INFO ifInfo = pIfList->InterfaceInfo[
@@ -80,7 +80,7 @@ void windows::Wifi::ScanNetworks(wifi_pc::type::WifiNetworks& networks)
             );
 
             {
-                wifi_pc::WifiNetwork network(
+                wpc::WifiNetwork network(
                     ssid, net.wlanSignalQuality,
                     net.bSecurityEnabled ? true : false
                 );
@@ -91,7 +91,7 @@ void windows::Wifi::ScanNetworks(wifi_pc::type::WifiNetworks& networks)
         WlanFreeMemory(pNetList);
     }
     else {
-        wifi_pc::ThrowError::General(
+        wpc::ThrowError::General(
             "windows: WlanGetAvailableNetworkList failed: " + dwResult
         );
         //std::cerr << "  WlanGetAvailableNetworkList failed: " << dwResult << "\n";

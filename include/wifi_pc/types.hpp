@@ -5,10 +5,10 @@
 #include <vector>
 
 
-namespace wifi_pc {
+namespace wpc {
 	namespace type {
 
 		typedef std::vector<std::string> WifiNames;
-		typedef std::vector<wifi_pc::WifiNetwork> WifiNetworks;
+		typedef std::vector<wpc::WifiNetwork> WifiNetworks;
 	};
 };

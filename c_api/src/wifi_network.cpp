@@ -5,18 +5,18 @@
 extern "C" {
 
 uint8_t wifi_pc_wifi_network_is_secured(const WifiPcWifiNetwork* context) {
-    auto wifi_network = (wifi_pc::WifiNetwork*) context;
+    auto wifi_network = (wpc::WifiNetwork*) context;
     return wifi_network->IsSecured() ? 1 : 0;
 }
 
 const char* wifi_pc_wifi_network_name(const WifiPcWifiNetwork* context) {
-    auto wifi_network = (wifi_pc::WifiNetwork*) context;
+    auto wifi_network = (wpc::WifiNetwork*) context;
 
     return wifi_network->name().data();
 }
 
 int wifi_pc_wifi_network_signal_quality(const WifiPcWifiNetwork* context) {
-    auto wifi_network = (wifi_pc::WifiNetwork*) context;
+    auto wifi_network = (wpc::WifiNetwork*) context;
 
     return wifi_network->signal_quality();
 }

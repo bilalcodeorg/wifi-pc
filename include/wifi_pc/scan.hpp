@@ -6,7 +6,7 @@
 #include <wifi_pc/types.hpp>
 #include <wifi_pc/wifi_network.hpp>
 
-namespace wifi_pc {
+namespace wpc {
 	class Scan {
 	private:
 		type::WifiNetworks networks_;

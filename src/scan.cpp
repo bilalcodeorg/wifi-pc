@@ -4,12 +4,11 @@
 #include <wifi_pc/throw_err.hpp>
 #include <windows/wifi_scan.hpp>
 
-wifi_pc::Scan::Scan()
-{
+wpc::Scan::Scan() {
 #ifdef _WIN32
 	windows::Wifi::ScanNetworks(this->networks_);
 #else
-	wifi_pc::ThrowError::UnsupportedPlatform();
+	wpc::ThrowError::UnsupportedPlatform();
 #endif
 
 	// Updating wifi name list
@@ -18,12 +17,12 @@ wifi_pc::Scan::Scan()
 	}
 }
 
-const wifi_pc::type::WifiNames& wifi_pc::Scan::network_names() const
+const wpc::type::WifiNames& wpc::Scan::network_names() const
 {
 	return this->network_names_;
 }
 
-const wifi_pc::type::WifiNetworks& wifi_pc::Scan::networks() const
+const wpc::type::WifiNetworks& wpc::Scan::networks() const
 {
 	return this->networks_;
 }

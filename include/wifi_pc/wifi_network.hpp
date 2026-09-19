@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace wifi_pc {
+namespace wpc {
 	class WifiNetwork {
 	private:
 		std::string ssid_;
