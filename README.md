@@ -33,7 +33,7 @@ int main() {
 	wpc::Scan scan_result;
 	
 	// Obtaining scanned network name list
-	wpc::type::WifiNames network_names = scan_result.network_names();
+	wpc::WifiNames network_names = scan_result.network_names();
 
 	// Printing names of scanned wifi
 	for (int i = 0; i < network_names.size(); i++) {

@@ -21,7 +21,7 @@ std::string windows::Wifi::WideToStr(const WCHAR* wide) {
 
 // Scanned wifi networks will be stored in networks paramter
 // of function
-void windows::Wifi::ScanNetworks(wpc::type::WifiNetworks& networks)
+void windows::Wifi::ScanNetworks(wpc::WifiNetworkList& networks)
 {
 
     HANDLE hClient = nullptr;

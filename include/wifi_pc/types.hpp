@@ -6,9 +6,6 @@
 
 
 namespace wpc {
-	namespace type {
-
-		typedef std::vector<std::string> WifiNames;
-		typedef std::vector<wpc::WifiNetwork> WifiNetworks;
-	};
+	typedef std::vector<std::string> WifiNameList;
+	typedef std::vector<wpc::WifiNetwork> WifiNetworkList;
 };

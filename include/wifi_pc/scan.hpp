@@ -9,11 +9,11 @@
 namespace wpc {
 	class Scan {
 	private:
-		type::WifiNetworks networks_;
-		type::WifiNames network_names_;
+		WifiNetworkList networks_;
+		WifiNameList network_names_;
 	public:
 		Scan();
-		const type::WifiNames& network_names() const;
-		const type::WifiNetworks& networks() const;
+		const WifiNameList& network_names() const;
+		const WifiNetworkList& networks() const;
 	};
 };

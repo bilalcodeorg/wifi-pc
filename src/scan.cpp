@@ -17,12 +17,12 @@ wpc::Scan::Scan() {
 	}
 }
 
-const wpc::type::WifiNames& wpc::Scan::network_names() const
+const wpc::WifiNameList& wpc::Scan::network_names() const
 {
 	return this->network_names_;
 }
 
-const wpc::type::WifiNetworks& wpc::Scan::networks() const
+const wpc::WifiNetworkList& wpc::Scan::networks() const
 {
 	return this->networks_;
 }
