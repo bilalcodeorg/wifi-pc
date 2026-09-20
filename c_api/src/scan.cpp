@@ -5,7 +5,7 @@
 
 extern "C" {
 
-WPC_API WpcCode wpc_scan_new(WpcScan* context) {
+WPC_API WpcCode wpc_scan_new(WpcScan*& context) {
     try {
         context = (WpcScan*) new wpc::Scan();
     }
