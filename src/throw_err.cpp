@@ -1,6 +1,6 @@
 #include <wifi_pc/throw_err.hpp>
 #include <wifi_pc/error.hpp>
-#include <wifi_pc/error_enum.hpp>
+#include <wifi_pc/error_code.hpp>
 #include <string>
 
 void wpc::ThrowError::General() {

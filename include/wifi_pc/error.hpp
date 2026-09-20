@@ -1,6 +1,6 @@
 #pragma once
 #include <stdexcept>
-#include <wifi_pc/error_enum.hpp>
+#include <wifi_pc/error_code.hpp>
 
 namespace wpc {
 
