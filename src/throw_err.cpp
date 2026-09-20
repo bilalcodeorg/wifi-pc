@@ -1,34 +1,31 @@
 #include <wifi_pc/throw_err.hpp>
-#include <stdexcept>
+#include <wifi_pc/error.hpp>
+#include <wifi_pc/error_enum.hpp>
 #include <string>
 
-void wpc::ThrowError::General()
-{
+void wpc::ThrowError::General() {
 	General("something went wrong");
 }
 
-void wpc::ThrowError::General(const std::string& msg)
-{
-	throw std::runtime_error("Error: " + msg);
+void wpc::ThrowError::General(const std::string& msg) {
+	throw wpc::Error(wpc::err_code::kGeneral, "Error: " + msg);
 }
 
-void wpc::ThrowError::WifiAdapterNotFound()
-{
+void wpc::ThrowError::NoAdapter() {
 	std::string msg = "failed to initialize Wi-Fi adapter";
-	WifiAdapterNotFound(msg);
+	NoAdapter(msg);
 }
 
-void wpc::ThrowError::WifiAdapterNotFound(const std::string& msg)
-{
-	throw std::runtime_error("WifiAdapterNotFound: " + msg);
+void wpc::ThrowError::NoAdapter(const std::string& msg) {
+	throw wpc::Error(wpc::err_code::kNoAdapter, "NoAdapterError: " + msg);
 }
 
-void wpc::ThrowError::UnsupportedPlatform()
-{
+void wpc::ThrowError::UnsupportedPlatform() {
 	UnsupportedPlatform("current platform not supported");
 }
 
-void wpc::ThrowError::UnsupportedPlatform(const std::string& msg)
-{
-	throw std::runtime_error("UnsupportedPlatform: " + msg);
+void wpc::ThrowError::UnsupportedPlatform(const std::string& msg) {
+	throw wpc::Error(
+		wpc::err_code::kUnsupportedPlatform, "UnsupportedPlatform: " + msg
+	);
 }

@@ -3,9 +3,10 @@
 namespace wpc::err_code {
 
 typedef enum {
-    kGeneralError,
+    kGeneral,
     kOsError,
-    kNoAdapterError
+    kNoAdapter,
+    kUnsupportedPlatform
 } ErrorCode;
 
 };

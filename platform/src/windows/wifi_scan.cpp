@@ -53,7 +53,7 @@ void windows::Wifi::ScanNetworks(wpc::WifiNetworkList& networks)
     }
 
     if (!pIfList->dwNumberOfItems) {
-        wpc::ThrowError::WifiAdapterNotFound("no adapter found");
+        wpc::ThrowError::NoAdapter("no adapter found");
     }
 
     WLAN_INTERFACE_INFO ifInfo = pIfList->InterfaceInfo[
