@@ -11,6 +11,14 @@ void wpc::ThrowError::General(const std::string& msg) {
 	throw wpc::Error(wpc::err_code::kGeneral, "Error: " + msg);
 }
 
+void wpc::ThrowError::OsError() {
+	ThrowError::OsError("operating system failed to respond");
+}
+
+void wpc::ThrowError::OsError(const std::string& msg) {
+	throw wpc::Error(wpc::err_code::kOsError, "OsError: " + msg);
+}
+
 void wpc::ThrowError::NoAdapter() {
 	std::string msg = "failed to initialize Wi-Fi adapter";
 	NoAdapter(msg);

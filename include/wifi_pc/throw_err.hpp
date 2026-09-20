@@ -9,6 +9,8 @@ namespace wpc {
 	public:
 		static void General();
 		static void General(const std::string& msg);
+		static void OsError();
+		static void OsError(const std::string& msg);
 		static void NoAdapter();
 		static void NoAdapter(const std::string& msg);
 		static void UnsupportedPlatform();

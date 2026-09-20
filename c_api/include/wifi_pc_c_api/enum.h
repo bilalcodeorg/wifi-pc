@@ -4,5 +4,6 @@ typedef enum {
     kWpcSuccess,
     kWpcError,
     kWpcGeneralError,
-    kWpcOsError
+    kWpcOsError,
+    kWpcNoAdapterError
 } WpcCode;

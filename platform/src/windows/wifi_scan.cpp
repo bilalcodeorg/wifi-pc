@@ -35,7 +35,7 @@ void windows::Wifi::ScanNetworks(wpc::WifiNetworkList& networks)
 
     if (dwResult != ERROR_SUCCESS) {
         //std::cerr << "WlanOpenHandle failed: " << dwResult << "\n";
-        wpc::ThrowError::General(
+        wpc::ThrowError::OsError(
             "windows: WlanOpenHandle failed: " + dwResult
         );
         //return 1;
@@ -46,7 +46,7 @@ void windows::Wifi::ScanNetworks(wpc::WifiNetworkList& networks)
     if (dwResult != ERROR_SUCCESS) {
         //std::cerr << "WlanEnumInterfaces failed: " << dwResult << "\n";
         WlanCloseHandle(hClient, nullptr);
-        wpc::ThrowError::General(
+        wpc::ThrowError::OsError(
             "windows: WlanEnumInterfaces failed: " + dwResult
         );
         //return 1;
@@ -91,7 +91,7 @@ void windows::Wifi::ScanNetworks(wpc::WifiNetworkList& networks)
         WlanFreeMemory(pNetList);
     }
     else {
-        wpc::ThrowError::General(
+        wpc::ThrowError::OsError(
             "windows: WlanGetAvailableNetworkList failed: " + dwResult
         );
         //std::cerr << "  WlanGetAvailableNetworkList failed: " << dwResult << "\n";
