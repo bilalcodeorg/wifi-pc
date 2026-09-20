@@ -18,6 +18,7 @@ add_library(
 	src/throw_err.cpp
 	src/wifi_network.cpp
 	platform/src/windows/wifi_scan.cpp
+	src/error.cpp
 )
 target_include_directories(WifiPc
     PUBLIC
