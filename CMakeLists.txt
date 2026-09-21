@@ -40,6 +40,7 @@ add_library (
     c_api/src/list.cpp
 	c_api/src/scan.cpp
 	c_api/src/wifi_network.cpp
+	c_api/src/error.cpp
 )
 add_library(WifiPc::Shared ALIAS WifiPcShared)
 target_include_directories(WifiPcShared

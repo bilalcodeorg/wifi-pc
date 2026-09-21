@@ -1,27 +1,31 @@
 #include <wifi_pc_c_api/scan.h>
-#include <wifi_pc_c_api/enum.h>
+#include <wifi_pc_c_api/error.h>
+#include <wifi_pc_c_api/error_enum.h>
 #include <wifi_pc/scan.hpp>
 #include <wifi_pc/error.hpp>
 
 extern "C" {
 
-WPC_API WpcCode wpc_scan_new(WpcScan*& context) {
+WpcScan* wpc_scan_new() {
+    WpcScan* scan = nullptr;
     try {
-        context = (WpcScan*) new wpc::Scan();
+        scan = (WpcScan*) new wpc::Scan();
     }
     catch (const wpc::Error& e) {
+        scan = nullptr;
+
         switch (e.code()) {
             case wpc::err_code::kOsError:
-                return kWpcOsError;
-
+                wpc_set_last_error(kWpcErrorOs, e.what());
+                break;
             case wpc::err_code::kNoAdapter:
-                return kWpcNoAdapterError;
-
+                wpc_set_last_error(kWpcErrorNoAdapter, e.what());
+                break;
             default:
-                return kWpcError;
+                wpc_set_last_error(kWpcErrorGeneral, e.what());
         }
     }
-    return kWpcSuccess;
+    return scan;
 }
 
 const WpcWifiNameList* wpc_scan_network_names(const WpcScan* context) {
