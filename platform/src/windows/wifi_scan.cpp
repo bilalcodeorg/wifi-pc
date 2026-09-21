@@ -7,8 +7,8 @@
 #include <vector>
 #include <string>
 #include <memory>
-#include <wifi_pc/throw_err.hpp>
 #include <wifi_pc/wifi_network.hpp>
+#include <wifi_pc/error.hpp>
 #include <wifi_pc/types.hpp>
 
 std::string windows::Wifi::WideToStr(const WCHAR* wide) {
@@ -35,9 +35,9 @@ void windows::Wifi::ScanNetworks(wpc::WifiNetworkList& networks)
 
     if (dwResult != ERROR_SUCCESS) {
         //std::cerr << "WlanOpenHandle failed: " << dwResult << "\n";
-        wpc::ThrowError::OsError(
-            "windows: WlanOpenHandle failed: " + dwResult
-        );
+        
+        WlanCloseHandle(hClient, nullptr);
+        throw wpc::error::OsError("WindowsError: WlanOpenHandle failed");
         //return 1;
     }
 
@@ -45,15 +45,16 @@ void windows::Wifi::ScanNetworks(wpc::WifiNetworkList& networks)
     dwResult = WlanEnumInterfaces(hClient, nullptr, &pIfList);
     if (dwResult != ERROR_SUCCESS) {
         //std::cerr << "WlanEnumInterfaces failed: " << dwResult << "\n";
+        WlanFreeMemory(pIfList);
         WlanCloseHandle(hClient, nullptr);
-        wpc::ThrowError::OsError(
-            "windows: WlanEnumInterfaces failed: " + dwResult
-        );
+        throw wpc::error::OsError("WindowsError: WlanEnumInterfaces failed");
         //return 1;
     }
 
     if (!pIfList->dwNumberOfItems) {
-        wpc::ThrowError::NoAdapter("no adapter found");
+        WlanFreeMemory(pIfList);
+        WlanCloseHandle(hClient, nullptr);
+        throw wpc::error::NoAdapter("NoAdapterError: no WiFi adapter found");
     }
 
     WLAN_INTERFACE_INFO ifInfo = pIfList->InterfaceInfo[
@@ -76,7 +77,7 @@ void windows::Wifi::ScanNetworks(wpc::WifiNetworkList& networks)
         for (DWORD j = 0; j < pNetList->dwNumberOfItems; j++) {
             WLAN_AVAILABLE_NETWORK net = pNetList->Network[j];
             std::string ssid(
-                (char*)net.dot11Ssid.ucSSID, net.dot11Ssid.uSSIDLength
+                (char*) net.dot11Ssid.ucSSID, net.dot11Ssid.uSSIDLength
             );
 
             {
@@ -91,9 +92,9 @@ void windows::Wifi::ScanNetworks(wpc::WifiNetworkList& networks)
         WlanFreeMemory(pNetList);
     }
     else {
-        wpc::ThrowError::OsError(
-            "windows: WlanGetAvailableNetworkList failed: " + dwResult
-        );
+        WlanFreeMemory(pIfList);
+        WlanCloseHandle(hClient, nullptr);
+        throw wpc::error::WifiOff();
         //std::cerr << "  WlanGetAvailableNetworkList failed: " << dwResult << "\n";
     }
 

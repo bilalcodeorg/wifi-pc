@@ -4,27 +4,27 @@
 #include <wifi_pc/scan.hpp>
 #include <wifi_pc/error.hpp>
 
-extern "C" {
-
 WpcScan* wpc_scan_new() {
     WpcScan* scan = nullptr;
     try {
         scan = (WpcScan*) new wpc::Scan();
     }
-    catch (const wpc::Error& e) {
-        scan = nullptr;
-
-        switch (e.code()) {
-            case wpc::err_code::kOsError:
-                wpc_set_last_error(kWpcErrorOs, e.what());
-                break;
-            case wpc::err_code::kNoAdapter:
-                wpc_set_last_error(kWpcErrorNoAdapter, e.what());
-                break;
-            default:
-                wpc_set_last_error(kWpcErrorGeneral, e.what());
-        }
+    catch (const wpc::error::OsError& e) {
+        wpc_set_last_error(kWpcErrorOs, e.what());
     }
+    catch (const wpc::error::NoAdapter& e) {
+        wpc_set_last_error(kWpcErrorNoAdapter, e.what());
+    }
+    catch (const wpc::error::WifiOff& e) {
+        wpc_set_last_error(kWpcErrorWifiOff, e.what());
+    }
+    catch (const wpc::error::UnsupportedPlatform& e) {
+        wpc_set_last_error(kWpcErrorUnsupportedPlatform, e.what());
+    }
+    catch (const wpc::Error& e) {
+        wpc_set_last_error(kWpcErrorGeneral, e.what());
+    }
+
     return scan;
 }
 
@@ -39,8 +39,6 @@ const WpcWifiNetworkList* wpc_scan_networks(const WpcScan* context) {
 }
 
 void wpc_scan_destroy(WpcScan* context) {
-    auto scan = (wpc::Scan*)context;
+    auto scan = (wpc::Scan*) context;
     delete scan;
 }
-
-} // extern "C"

@@ -4,12 +4,12 @@
 #include <wifi_pc_c_api/wifi_network.h>
 #include <stdint.h>
 
+typedef struct WpcWifiNameList WpcWifiNameList;
+typedef struct WpcWifiNetworkList WpcWifiNetworkList;
+
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus
-
-typedef struct WpcWifiNameList WpcWifiNameList;
-typedef struct WpcWifiNetworkList WpcWifiNetworkList;
 
 WPC_API const char* wpc_wifi_name_list_at(
     const WpcWifiNameList* context, uint64_t index

@@ -10,7 +10,7 @@ const char* wpc_wifi_name_list_at(
 }
 
 const WpcWifiNetwork* wpc_wifi_network_list_at(
-const WpcWifiNetworkList* context, uint64_t index
+    const WpcWifiNetworkList* context, uint64_t index
 ) {
     auto names = (wpc::WifiNetworkList*) context;
 

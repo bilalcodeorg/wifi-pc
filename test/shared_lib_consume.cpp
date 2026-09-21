@@ -2,12 +2,12 @@
 #include <iostream>
 
 int main() {
-	WpcScan* scan = nullptr;
+	WpcScan* scan = wpc_scan_new();
 	const WpcWifiNetworkList* nets = nullptr;
-	WpcCode result = wpc_scan_new(scan);
 	
-	if (result != kWpcSuccess) {
-		std::cout << "Error occured";
+	if (scan == nullptr) {
+		std::cout << "Error code: " << wpc_last_error_code() << "\n";
+		std::cout << "Error reason: " << wpc_last_error_reason() << "\n";
 		wpc_scan_destroy(scan);
 		return 1;
 	}
@@ -27,6 +27,7 @@ int main() {
 		)<<std::endl;
 	}
 	
+	wpc_scan_destroy(scan);
 	std::cin.get();
 	return 0;
 }

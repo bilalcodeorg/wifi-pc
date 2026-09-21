@@ -1,14 +1,14 @@
 #include <wifi_pc/scan.hpp>
 #include <wifi_pc/types.hpp>
 #include <wifi_pc/wifi_network.hpp>
-#include <wifi_pc/throw_err.hpp>
+#include <wifi_pc/error.hpp>
 #include <windows/wifi_scan.hpp>
 
 wpc::Scan::Scan() {
 #ifdef _WIN32
 	windows::Wifi::ScanNetworks(this->networks_);
 #else
-	wpc::ThrowError::UnsupportedPlatform();
+	throw wpc::error::UnsupportedPlatform();
 #endif
 
 	// Updating wifi name list

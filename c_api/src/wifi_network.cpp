@@ -3,8 +3,6 @@
 #include <stdint.h>
 #include <string>
 
-extern "C" {
-
 uint8_t wpc_wifi_network_is_secured(const WpcWifiNetwork* context) {
     auto wifi_network = (wpc::WifiNetwork*) context;
     return wifi_network->IsSecured() ? 1 : 0;
@@ -21,5 +19,3 @@ uint8_t wpc_wifi_network_signal_quality(const WpcWifiNetwork* context) {
 
     return (uint8_t) wifi_network->signal_quality();
 }
-
-} // extern "C"

@@ -15,7 +15,6 @@ project (WifiPc)
 add_library(
 	WifiPc STATIC
 	src/scan.cpp
-	src/throw_err.cpp
 	src/wifi_network.cpp
 	platform/src/windows/wifi_scan.cpp
 	src/error.cpp

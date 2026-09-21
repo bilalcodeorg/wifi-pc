@@ -6,5 +6,7 @@ typedef enum {
     kWpcErrorNotPresent,
     kWpcErrorGeneral,
     kWpcErrorOs,
-    kWpcErrorNoAdapter
+    kWpcErrorNoAdapter,
+    kWpcErrorUnsupportedPlatform,
+    kWpcErrorWifiOff
 } WpcErrorCode;
