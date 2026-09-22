@@ -9,7 +9,7 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project (WifiPc)
+project (WifiPc VERSION 1.0 LANGUAGES CXX)
 
 # Add library
 add_library(
@@ -19,6 +19,7 @@ add_library(
 	platform/src/windows/wifi_scan.cpp
 	src/error.cpp
 )
+add_library(WifiPc::Cpp ALIAS WifiPc)
 target_include_directories(WifiPc
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -33,21 +34,21 @@ if(WIN32)
 endif()
 
 # Standard shared library
-project (WifiPcShared)
+project (WifiPcCAbi)
 add_library (
-	WifiPcShared SHARED
+	WifiPcCAbi STATIC
     c_api/src/list.cpp
 	c_api/src/scan.cpp
 	c_api/src/wifi_network.cpp
 	c_api/src/error.cpp
 )
-add_library(WifiPc::Shared ALIAS WifiPcShared)
-target_include_directories(WifiPcShared
+add_library(WifiPc::CAbi ALIAS WifiPcCAbi)
+target_include_directories(WifiPcCAbi
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/c_api/include
 )
-target_link_libraries(WifiPcShared PRIVATE WifiPc)
-target_compile_definitions(WifiPcShared PRIVATE WPC_COMPILING)
+target_link_libraries(WifiPcCAbi PRIVATE WifiPc)
+target_compile_definitions(WifiPcCAbi PUBLIC WPC_COMPILING)
 
 # Test project
 project (Test)
@@ -62,19 +63,22 @@ target_include_directories(Test
 target_link_libraries(Test PRIVATE WifiPc)
 
 # Test shared lib
-project (TestSharedLib)
+project (TestCAbi)
 add_executable (
-	TestSharedLib
-	test/shared_lib_consume.cpp
+	TestCAbi
+	test/c_abi_consume.cpp
 )
-target_include_directories(TestSharedLib
+target_include_directories(TestCAbi
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/c_api/include
 )
-target_link_libraries(TestSharedLib PRIVATE WifiPc::Shared)
+target_link_libraries(TestCAbi PRIVATE WifiPc::CAbi)
 
 # Cmake version
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET WifiPc PROPERTY CXX_STANDARD 20)
-  set_property(TARGET Test PROPERTY CXX_STANDARD 20)
-endif()
+set_target_properties(
+    WifiPc WifiPcCAbi
+    PROPERTIES
+        CXX_STANDARD 20
+        CXX_STANDARD_REQUIRED ON
+        CXX_EXTENSIONS OFF
+)
