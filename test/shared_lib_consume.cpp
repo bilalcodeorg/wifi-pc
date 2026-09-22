@@ -4,6 +4,7 @@
 int main() {
 	WpcScan* scan = wpc_scan_new();
 	const WpcWifiNetworkList* nets = nullptr;
+	size_t networks_count;
 	
 	if (scan == nullptr) {
 		std::cout << "Error code: " << wpc_last_error_code() << "\n";
@@ -13,8 +14,9 @@ int main() {
 	}
 
 	nets = wpc_scan_networks(scan);
+	networks_count = wpc_wifi_network_list_size(nets);
 	
-	for (int i = 0; i < wpc_wifi_network_list_size(nets); i++) {
+	for (int i = 0; i < networks_count; i++) {
 		auto network = wpc_wifi_network_list_at(nets, i);
 
 		std::cout<<"Name: "<<wpc_wifi_network_name(network)<<" | ";
