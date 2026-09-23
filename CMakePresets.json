@@ -7,17 +7,27 @@
             "hidden": true,
             "generator": "Ninja",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_SHARED_LIBS": "OFF"
             }
         },
         {
-            "name": "mingw-windows-x64",
-            "displayName": "MinGW Windows x64",
+            "name": "static-lib-windows-x64-release",
+            "displayName": "Static Lib Windows x64",
             "inherits": "mingw-base",
-            "binaryDir": "${sourceDir}/build/mingw-windows-x64",
+            "binaryDir": "${sourceDir}/build/static-lib-windows-x64-release",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "x86_64-w64-mingw32-gcc",
                 "CMAKE_CXX_COMPILER": "x86_64-w64-mingw32-g++"
+            }
+        },
+        {
+            "name": "shared-lib-windows-x64-release",
+            "displayName": "Shared Lib Windows x64",
+            "inherits": "static-lib-windows-x64-release",
+            "binaryDir": "${sourceDir}/build/shared-lib-windows-x64-release",
+            "cacheVariables": {
+                "BUILD_SHARED_LIBS": "ON"
             }
         },
         {
@@ -43,8 +53,8 @@
     ],
     "buildPresets": [
         {
-            "name": "mingw-windows-x64",
-            "configurePreset": "mingw-windows-x64"
+            "name": "static-lib-windows-x64-release",
+            "configurePreset": "static-lib-windows-x64-release"
         },
         {
             "name": "mingw-windows-x86",

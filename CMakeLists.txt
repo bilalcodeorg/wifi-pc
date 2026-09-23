@@ -36,7 +36,7 @@ endif()
 # Standard shared library
 project (WifiPcCAbi)
 add_library (
-	WifiPcCAbi STATIC
+	WifiPcCAbi
     c_api/src/list.cpp
 	c_api/src/scan.cpp
 	c_api/src/wifi_network.cpp
