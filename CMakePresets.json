@@ -1,75 +1,58 @@
 ﻿{
-    "version": 3,
+    "version": 6,
+
     "configurePresets": [
         {
-            "name": "windows-base",
+            "name": "mingw-base",
             "hidden": true,
             "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl.exe",
-                "CMAKE_CXX_COMPILER": "cl.exe"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Windows"
+                "CMAKE_BUILD_TYPE": "Release"
             }
         },
         {
-            "name": "x64-debug",
-            "displayName": "x64 Debug",
-            "inherits": "windows-base",
-            "architecture": {
-                "value": "x64",
-                "strategy": "external"
-            },
+            "name": "mingw-windows-x64",
+            "displayName": "MinGW Windows x64",
+            "inherits": "mingw-base",
+            "binaryDir": "${sourceDir}/build/mingw-windows-x64",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "$env{VSINSTALLDIR}Common7/IDE/CommonExtensions/Microsoft/CMake/cmake/Microsoft/SegmentHeap.cmake"
+                "CMAKE_C_COMPILER": "x86_64-w64-mingw32-gcc",
+                "CMAKE_CXX_COMPILER": "x86_64-w64-mingw32-g++"
             }
         },
         {
-            "name": "x64-release",
-            "displayName": "x64 Release",
-            "inherits": "x64-debug",
+            "name": "mingw-windows-x86",
+            "displayName": "MinGW Windows x86",
+            "inherits": "mingw-base",
+            "binaryDir": "${sourceDir}/build/mingw-windows-x86",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "$env{VSINSTALLDIR}Common7/IDE/CommonExtensions/Microsoft/CMake/cmake/Microsoft/SegmentHeap.cmake"
+                "CMAKE_C_COMPILER": "i686-w64-mingw32-gcc",
+                "CMAKE_CXX_COMPILER": "i686-w64-mingw32-g++"
             }
         },
         {
-            "name": "x86-debug",
-            "displayName": "x86 Debug",
-            "inherits": "windows-base",
-            "architecture": {
-                "value": "x86",
-                "strategy": "external"
-            },
+            "name": "mingw-windows-arm64",
+            "displayName": "MinGW Windows ARM64",
+            "inherits": "mingw-base",
+            "binaryDir": "${sourceDir}/build/mingw-windows-arm64",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "$env{VSINSTALLDIR}Common7/IDE/CommonExtensions/Microsoft/CMake/cmake/Microsoft/SegmentHeap.cmake"
+                "CMAKE_C_COMPILER": "aarch64-w64-mingw32-gcc",
+                "CMAKE_CXX_COMPILER": "aarch64-w64-mingw32-g++"
             }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "mingw-windows-x64",
+            "configurePreset": "mingw-windows-x64"
         },
         {
-            "name": "x86-release",
-            "displayName": "x86 Release",
-            "inherits": "x86-debug",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "$env{VSINSTALLDIR}Common7/IDE/CommonExtensions/Microsoft/CMake/cmake/Microsoft/SegmentHeap.cmake"
-            }
+            "name": "mingw-windows-x86",
+            "configurePreset": "mingw-windows-x86"
         },
         {
-            "name": "x64-Mingw",
-            "generator": "MinGW Makefiles",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_CXX_COMPILER": "g++"
-            }
+            "name": "mingw-windows-arm64",
+            "configurePreset": "mingw-windows-arm64"
         }
     ]
 }
