@@ -13,7 +13,6 @@
         },
         {
             "name": "static-lib-windows-x64-release",
-            "displayName": "Static Lib Windows x64",
             "inherits": "mingw-base",
             "binaryDir": "${sourceDir}/build/static-lib-windows-x64-release",
             "cacheVariables": {
@@ -23,7 +22,6 @@
         },
         {
             "name": "shared-lib-windows-x64-release",
-            "displayName": "Shared Lib Windows x64",
             "inherits": "static-lib-windows-x64-release",
             "binaryDir": "${sourceDir}/build/shared-lib-windows-x64-release",
             "cacheVariables": {
@@ -31,18 +29,24 @@
             }
         },
         {
-            "name": "mingw-windows-x86",
-            "displayName": "MinGW Windows x86",
+            "name": "static-lib-windows-x86-release",
             "inherits": "mingw-base",
-            "binaryDir": "${sourceDir}/build/mingw-windows-x86",
+            "binaryDir": "${sourceDir}/build/static-lib-windows-x86-release",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "i686-w64-mingw32-gcc",
                 "CMAKE_CXX_COMPILER": "i686-w64-mingw32-g++"
             }
         },
         {
+            "name": "shared-lib-windows-x86-release",
+            "binaryDir": "${sourceDir}/build/shared-lib-windows-x86-release",
+            "inherits": "static-lib-windows-x86-release",
+            "cacheVariables": {
+                "BUILD_SHARED_LIBS": "ON"
+            }
+        },
+        {
             "name": "mingw-windows-arm64",
-            "displayName": "MinGW Windows ARM64",
             "inherits": "mingw-base",
             "binaryDir": "${sourceDir}/build/mingw-windows-arm64",
             "cacheVariables": {
@@ -57,8 +61,12 @@
             "configurePreset": "static-lib-windows-x64-release"
         },
         {
-            "name": "mingw-windows-x86",
-            "configurePreset": "mingw-windows-x86"
+            "name": "static-lib-windows-x86-release",
+            "configurePreset": "static-lib-windows-x86-release"
+        },
+        {
+            "name": "shared-lib-windows-x86-release",
+            "configurePreset": "shared-lib-windows-x86-release"
         },
         {
             "name": "mingw-windows-arm64",
