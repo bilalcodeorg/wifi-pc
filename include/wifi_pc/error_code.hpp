@@ -4,6 +4,7 @@
 namespace wpc::err_code {
 
 typedef enum {
+    kNoError,
     kGeneral,
     kOsError,
     kNoAdapter,
