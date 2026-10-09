@@ -15,7 +15,7 @@ public:
 
 }; // namespace wpc
 
-namespace wpc::error {
+namespace wpc { namespace error {
 
 class GeneralError : public Error {
 public:
@@ -44,4 +44,4 @@ public:
     WifiOff(const std::string& reason);
 };
 
-} // namespace wpc::error
+}} // namespace wpc::error

@@ -3,11 +3,6 @@
 #
 cmake_minimum_required (VERSION 3.10)
 
-# Enable Hot Reload for MSVC compilers if supported.
-if (POLICY CMP0141)
-  cmake_policy(SET CMP0141 NEW)
-  set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
-endif()
 
 project (WifiPc VERSION 1.0 LANGUAGES CXX)
 
@@ -15,9 +10,9 @@ project (WifiPc VERSION 1.0 LANGUAGES CXX)
 add_library(
 	WifiPc STATIC
 	src/scan.cpp
+	src/error.cpp
 	src/wifi_network.cpp
 	platform/src/windows/wifi_scan.cpp
-	src/error.cpp
 )
 add_library(WifiPc::Cpp ALIAS WifiPc)
 target_include_directories(WifiPc
@@ -26,17 +21,18 @@ target_include_directories(WifiPc
 	PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/platform/include
 )
-
-# TODO: Add tests and install targets if needed.
-
 if(WIN32)
     target_link_libraries(WifiPc PRIVATE wlanapi)
 endif()
+set_target_properties(WifiPc PROPERTIES
+    OUTPUT_NAME "wifipc_static"
+    PREFIX ""
+)
 
 # Standard shared library
 project (WifiPcCAbi)
 add_library (
-	WifiPcCAbi
+	WifiPcCAbi SHARED
     c_api/src/list.cpp
 	c_api/src/scan.cpp
 	c_api/src/wifi_network.cpp
@@ -49,36 +45,29 @@ target_include_directories(WifiPcCAbi
 )
 target_link_libraries(WifiPcCAbi PRIVATE WifiPc)
 target_compile_definitions(WifiPcCAbi PUBLIC WPC_COMPILING)
+set_target_properties(WifiPcCAbi PROPERTIES
+    OUTPUT_NAME "wifi_pc"
+    PREFIX ""
+)
 
-# Test project
-project (Test)
-add_executable (
-	Test
-	test/usage.cpp
-)
-target_include_directories(Test
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-target_link_libraries(Test PRIVATE WifiPc)
+# CXX version
+foreach(target WifiPc WifiPcCAbi)
 
-# Test shared lib
-project (TestCAbi)
-add_executable (
-	TestCAbi
-	test/c_abi_consume.cpp
-)
-target_include_directories(TestCAbi
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/c_api/include
-)
-target_link_libraries(TestCAbi PRIVATE WifiPc::CAbi)
+    target_compile_features(${target} PUBLIC cxx_std_11)
 
-# Cmake version
-set_target_properties(
-    WifiPc WifiPcCAbi
-    PROPERTIES
-        CXX_STANDARD 20
-        CXX_STANDARD_REQUIRED ON
-        CXX_EXTENSIONS OFF
-)
+    set_target_properties(
+        ${target}
+        PROPERTIES
+            CXX_STANDARD 11
+            CXX_STANDARD_REQUIRED ON
+            CXX_EXTENSIONS ON
+    )
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        target_compile_options(${target} PRIVATE -Wall -Wextra -pedantic-errors)
+        target_compile_options(${target} PRIVATE -Wall -Wextra -pedantic-errors)
+    elseif(MSVC)
+        target_compile_options(${target} PRIVATE /W4 /permissive-)
+        target_compile_options(${target} PRIVATE /W4 /permissive-)
+    endif()
+
+endforeach()
