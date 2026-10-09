@@ -51,16 +51,15 @@ set_target_properties(WifiPcCAbi PROPERTIES
 )
 
 # CXX version
-foreach(target WifiPc WifiPcCAbi)
-
-    target_compile_features(${target} PUBLIC cxx_std_11)
+function(target_cxx_strict_version target cxx_std_version)
+    target_compile_features(${target} PUBLIC cxx_std_${cxx_std_version})
 
     set_target_properties(
         ${target}
         PROPERTIES
-            CXX_STANDARD 11
+            CXX_STANDARD ${cxx_std_version}
             CXX_STANDARD_REQUIRED ON
-            CXX_EXTENSIONS ON
+            CXX_EXTENSIONS OFF
     )
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         target_compile_options(${target} PRIVATE -Wall -Wextra -pedantic-errors)
@@ -69,5 +68,7 @@ foreach(target WifiPc WifiPcCAbi)
         target_compile_options(${target} PRIVATE /W4 /permissive-)
         target_compile_options(${target} PRIVATE /W4 /permissive-)
     endif()
+endfunction()
 
-endforeach()
+target_cxx_strict_version(WifiPc 11)
+target_cxx_strict_version(WifiPcCAbi 11)
