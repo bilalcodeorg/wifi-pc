@@ -69,6 +69,6 @@ function(target_cxx_strict_version target cxx_std_version)
         target_compile_options(${target} PRIVATE /W4 /permissive-)
     endif()
 endfunction()
-
+# Setting strict CXX version
 target_cxx_strict_version(WifiPc 11)
 target_cxx_strict_version(WifiPcCAbi 11)
