@@ -17,6 +17,7 @@
             "binaryDir": "${sourceDir}/build/windows-x64",
             "toolchainFile": "${sourceDir}/toolchain/toolchain-win-x64.cmake"
         },
+        
         {
             "name": "windows-x86",
             "inherits": "base",
@@ -29,6 +30,12 @@
             "inherits": "base",
             "binaryDir": "${sourceDir}/build/windows-arm64",
             "toolchainFile": "${sourceDir}/toolchain/toolchain-win-arm64.cmake"
+        },
+        {
+            "name": "linux-x64",
+            "inherits": "base",
+            "binaryDir": "${sourceDir}/build/linux-x64",
+            "toolchainFile": "${sourceDir}/toolchain/toolchain-linux-x64.cmake"
         }
     ],
     "buildPresets": [
@@ -43,6 +50,10 @@
         {
             "name": "windows-arm64",
             "configurePreset": "windows-arm64"
+        },
+        {
+            "name": "linux-x64",
+            "configurePreset": "linux-x64"
         }
     ]
 }

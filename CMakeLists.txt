@@ -27,6 +27,7 @@ endif()
 set_target_properties(WifiPc PROPERTIES
     OUTPUT_NAME "wifipc_static"
     PREFIX ""
+    POSITION_INDEPENDENT_CODE ON
 )
 
 # Standard shared library
