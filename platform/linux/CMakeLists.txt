@@ -17,9 +17,11 @@ target_include_directories(WifiPcLinux
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-target_include_directories(WifiPcLinux SYSTEM PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/include
+target_include_directories(WifiPcLinux SYSTEM 
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/include
 )
+
 if(LINUX)
     target_link_libraries(WifiPcLinux PRIVATE nl-3)
     target_link_libraries(WifiPcLinux PRIVATE nl-genl-3)

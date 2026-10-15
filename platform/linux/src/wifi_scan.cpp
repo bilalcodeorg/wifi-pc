@@ -1,3 +1,4 @@
+#include <wifi_scan.hpp>
 #include <wifi_scan_helper.hpp>
 #include <net/if.h>
 #include <errno.h>
@@ -20,7 +21,7 @@ using namespace wpc::linux_wifi_fn;
 #define MAX_AP          256
 #define MAX_IFACES      16
 
-void run() {
+void wpc::linux::run() {
 
     ap_t ap_list[MAX_AP];
     int  ap_count = 0;
