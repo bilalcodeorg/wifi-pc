@@ -21,7 +21,7 @@ using namespace wpc::linux_wifi_fn;
 #define MAX_AP          256
 #define MAX_IFACES      16
 
-void wpc::linux::run() {
+void wpc::linux_native::run() {
 
     ap_t ap_list[MAX_AP];
     int  ap_count = 0;
