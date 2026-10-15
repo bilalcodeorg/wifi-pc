@@ -6,6 +6,8 @@ cmake_minimum_required (VERSION 3.10)
 
 project (WifiPc VERSION 1.0 LANGUAGES CXX)
 
+add_subdirectory(platform/linux)
+
 # Add library
 add_library(
 	WifiPc STATIC
@@ -14,16 +16,27 @@ add_library(
 	src/wifi_network.cpp
 	platform/src/windows/wifi_scan.cpp
 )
+
+# Library alias
 add_library(WifiPc::Cpp ALIAS WifiPc)
+
+# Include folders
 target_include_directories(WifiPc
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 	PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/platform/include
 )
+
+# Windows native lib linking
 if(WIN32)
     target_link_libraries(WifiPc PRIVATE wlanapi)
 endif()
+
+# Linux helper sub-lib
+target_link_libraries(WifiPc PRIVATE WifiPc::Linux)
+
+# Setting target properties
 set_target_properties(WifiPc PROPERTIES
     OUTPUT_NAME "wifipc_static"
     PREFIX ""
